@@ -58,7 +58,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppViews\Registration.html" />
+    <Content Include="Css\AddArticle.css" />
+    <Content Include="Css\AddEvents.css" />
+    <Content Include="Css\AdSetting.css" />
+    <Content Include="Css\AppCategory.css" />
+    <Content Include="Css\AppDishType.css" />
+    <Content Include="Css\ArticleList.css" />
+    <Content Include="Css\BusinessInformation.css" />
+    <Content Include="Css\CouponsGeneration.css" />
+    <Content Include="Css\CouponsStatus.css" />
+    <Content Include="Css\DataExport.css" />
+    <Content Include="Css\IDelicious.css" />
+    <Content Include="Css\Login.css" />
+    <Content Include="Css\Navigation.css" />
     <Content Include="Css\Registration.css" />
+    <Content Include="Css\SelectControl.css" />
+    <Content Include="Css\ServiceSModification.css" />
+    <Content Include="Css\TableListControl.css" />
+    <Content Include="Css\UserInfo.css" />
     <Content Include="Img\Img_edit.png" />
     <Content Include="Img\Img_first.png" />
     <Content Include="Img\Img_five.png" />
@@ -81,7 +98,30 @@
     <Content Include="Img\Img_UploadPic.png" />
     <Content Include="Img\Img_UserName.png" />
     <Content Include="JSLibrary\jquery-1.8.3.min.js" />
+    <Content Include="JSLibrary\SelectControl.js" />
     <Content Include="test1.html" />
+    <Content Include="Views\AddArticle.html" />
+    <Content Include="Views\AddEvents.html" />
+    <Content Include="Views\AdSetting.html" />
+    <Content Include="Views\AppCategory.html" />
+    <Content Include="Views\AppCuisine.html" />
+    <Content Include="Views\AppDishType.html" />
+    <Content Include="Views\APPEnjoyLife.html" />
+    <Content Include="Views\AreaClassificationOne.html" />
+    <Content Include="Views\AreaClassificationTwo.html" />
+    <Content Include="Views\ArticleList.html" />
+    <Content Include="Views\BusinessInformation.html" />
+    <Content Include="Views\CouponsGeneration.html" />
+    <Content Include="Views\CouponsStatus.html" />
+    <Content Include="Views\DataExport.html" />
+    <Content Include="Views\EnjoyLife.html" />
+    <Content Include="Views\EventsList.html" />
+    <Content Include="Views\IDelicious.html" />
+    <Content Include="Views\Login.html" />
+    <Content Include="Views\SceneClassification.html" />
+    <Content Include="Views\ServicesModification.html" />
+    <Content Include="Views\TransactionList.html" />
+    <Content Include="Views\UserInfo.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -116,9 +156,7 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
