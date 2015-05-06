@@ -68,6 +68,7 @@
     <Content Include="Css\CouponsGeneration.css" />
     <Content Include="Css\CouponsStatus.css" />
     <Content Include="Css\DataExport.css" />
+    <Content Include="Css\easydropdown.css" />
     <Content Include="Css\IDelicious.css" />
     <Content Include="Css\Login.css" />
     <Content Include="Css\Navigation.css" />
@@ -98,6 +99,7 @@
     <Content Include="Img\Img_UploadPic.png" />
     <Content Include="Img\Img_UserName.png" />
     <Content Include="JSLibrary\jquery-1.8.3.min.js" />
+    <Content Include="JSLibrary\jquery.easydropdown.min.js" />
     <Content Include="JSLibrary\SelectControl.js" />
     <Content Include="test1.html" />
     <Content Include="Views\AddArticle.html" />

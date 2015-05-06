@@ -83,8 +83,8 @@ namespace IMeiWeiWebService
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string CreateBusiness(
-            string businessId, string businessName, string businessPhone,string businessHours, 
-            int? percapitaconsumption, int? restauranthighLights, string firstOffer,
+            string businessId, string businessName, string businessAddress, string businessPhone,
+            string businessHours, string percapitaConsumption, string restauranThighLights, string firstOffer,
             string vipOffer, string businessTypeid)
         {
             IMeiWei.BLL.business bll_business = new IMeiWei.BLL.business();
@@ -92,12 +92,14 @@ namespace IMeiWeiWebService
 
             model_business.BusinessId = businessId;
             model_business.BusinessName = businessName;
+            model_business.BusinessAddress = businessAddress;
             model_business.BusinessPhone = businessPhone;
             model_business.BusinessTypeId = businessTypeid;
+            model_business.BusinessHours = businessHours;
             model_business.FirstOffer = firstOffer;
-            model_business.PerCapitaConsumption = percapitaconsumption;
+            model_business.PerCapitaConsumption = Convert.ToInt32(percapitaConsumption);
             model_business.VIPOffer = vipOffer;
-            model_business.PerCapitaConsumption = restauranthighLights;
+            model_business.RestaurantHighlights = restauranThighLights;
 
             bll_business.Add(model_business);
 

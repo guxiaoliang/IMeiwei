@@ -5,7 +5,10 @@
     <title></title>
     <link rel="stylesheet" href="../Css/Navigation.css" type="text/css">
     <link rel="stylesheet" href="../Css/IDelicious.css" type="text/css">
+    <link rel="stylesheet" href="../Css/SelectControlCommon.css" type="text/css">
     <link rel="stylesheet" href="../Css/SelectControl.css" type="text/css">
+    <link rel="stylesheet" href="../Css/easydropdown.css" type="text/css">
+    
 </head>
 <body>
     <div class="css_main">
@@ -23,7 +26,7 @@
             <div class="css_navigation">
                 <div class="css_navigationItem">
                     <ul>商 户 添 加</ul>
-                    <li ><span class="css_active"> > </span><a class="css_active" href="IDelicious.html">爱 美 味</a></li>
+                    <li><span class="css_active"> > </span><a class="css_active" href="IDelicious.html">爱 美 味</a></li>
                     <li><span class="css_inActive">&#12288</span><a href="EnjoyLife.html">乐 生 活</a></li>
                 </div>
                 <div class="css_navigationItem">
@@ -64,192 +67,153 @@
                 <div class="css_content_title">
                     <div class="css_content_title_item">
                         <div class="css_content_title_action">爱美味_商户创建</div>
-                        <div class="css_content_title_id">商户 ID：9876543210</div>
+                        <div class="css_content_title_id">商户 ID：<input id="businessId" style="border: none; height: 100%" type="text" value="9876543210" /></div>
                     </div>
                     <div class="css_content_title_button">
                         <input class="css_button css_button_reFill" type="button" value="重填" />
-                        <input class="css_button css_button_release" type="button" value="发布" />
+                        <input id="Js_Release" class="css_button css_button_release" type="button" value="发布" />
                     </div>
                 </div>
                 <div class="css_content_basicInfo">
                     <ul class="css_content_basicInfo_title">基本信息</ul>
-                        <li class="css_content_basicInfo_item" style="padding-top:5px;">
-                            <div class="css_content_basicInfo_item_name">商户名称</div>
-                            <div class="css_content_basicInfo_item_content" ></div>
-                        </li>
+                    <li class="css_content_basicInfo_item" style="padding-top:5px;">
+                        <div class="css_content_basicInfo_item_name">商户名称</div>
+                        <div class="css_content_basicInfo_item_content">
+                            <input id="businessName" style="border: none; height: 100%;width: 100%" type="text" value="商户名称" />
+                        </div>
+                    </li>
                     <li class="css_content_basicInfo_item">
                         <div class="css_content_basicInfo_item_name">联系地址</div>
-                        <div class="css_content_basicInfo_item_content" ></div>
+                        <div class="css_content_basicInfo_item_content">
+                            <input id="businessAddress" style="border: none; height: 100%;width: 100%" type="text" value="联系地址" />
+                        </div>
                     </li>
                     <li class="css_content_basicInfo_item">
                         <div class="css_content_basicInfo_item_name">联系电话</div>
-                        <div class="css_content_basicInfo_item_content" ></div>
+                        <div class="css_content_basicInfo_item_content">
+                            <input id="businessPhone" style="border: none; height: 100%;width: 100%" type="text" value="联系电话" />
+                        </div>
                     </li>
                     <li class="css_content_basicInfo_item">
                         <div class="css_content_basicInfo_item_name">营业时间</div>
-                        <div class="css_content_basicInfo_item_content" ></div>
+                        <div class="css_content_basicInfo_item_content">
+                            <input id="businessHours" style="border: none; height: 100%;width: 100%" type="text" value="营业时间" />
+                        </div>
                     </li>
                     <li class="css_content_basicInfo_item">
                         <div class="css_content_basicInfo_item_name" style="border-bottom: none">人均消费</div>
-                        <div class="css_content_basicInfo_item_content" style="border-bottom: none"></div>
+                        <div class="css_content_basicInfo_item_content" style="border-bottom: none">
+                            <input id="percapitaConsumption" style="border: none; height: 100%;width: 100%" type="text" value="1222" />
+                        </div>
                     </li>
                 </div>
                 <div class="css_content_group">
                     <div class="css_content_group_selectItems">
                         <div class="css_content_group_selectItem">
-                            <img class = "css_content_group_selectItem_img" src="../Img/Img_first.png" alt="" />
+                            <img class="css_content_group_selectItem_img" src="../Img/Img_first.png" alt="" />
+                            <div class="cate" style="float:left;">
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">主营菜系</option>
+                                    <option value="1">菜系1</option>
+                                    <option value="2">菜系2</option>
+                                    <option value="3">菜系3</option>
+                                    <option value="4">菜系4</option>
+                                </select>
+                            </div>
+                            <div class="cate">
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">请选择菜系</option>
+                                    <option value="1">菜系1</option>
+                                    <option value="2">菜系2</option>
+                                    <option value="3">菜系3</option>
+                                    <option value="4">菜系4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="css_content_group_selectItem_blank"></div>
+                        <div class="css_content_group_selectItem">
+                            <img class="css_content_group_selectItem_img" src="../Img/Img_second.png" alt="" />
+                            <div class="cate" style="float:left;">
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">请选择环境氛围</option>
+                                    <option value="1">情侣表白</option>
+                                    <option value="2">商务宴请</option>
+                                    <option value="3">景观高楼</option>
+                                    <option value="4">海景阳台</option>
+                                </select>
+                            </div>
+                            <div class="cate">
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">请选择类目</option>
+                                    <option value="1">情侣表白</option>
+                                    <option value="2">商务宴请</option>
+                                    <option value="3">景观高楼</option>
+                                    <option value="4">海景阳台</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="css_content_group_selectItem_blank"></div>
+                        <div class="css_content_group_selectItem">
+                            <img class="css_content_group_selectItem_img" src="../Img/Img_third.png" alt="" />
+                            <div class="cate" style="float:left;">
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">请选择地区</option>
+                                    <option value="1">黄埔区</option>
+                                    <option value="2">浦东新区</option>
+                                    <option value="3">闵行区</option>
+                                    <option value="4">普陀区</option>
+                                </select>
+                            </div>
+                            <div class="cate">
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">请选择地标</option>
+                                    <option value="1">地标一</option>
+                                    <option value="2">地标二</option>
+                                    <option value="3">地标三</option>
+                                    <option value="4">地标四</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="css_content_group_selectItem_blank"></div>
+                        <div class="css_content_group_selectItem">
+                            <img class="css_content_group_selectItem_img" src="../Img/Img_four.png" alt="" />
                             <div class="cate" style="float:left;">
                                 <div class="cate_wrp">
-                                    <div class="cate_inp cate_tri">主营菜系</div>
-                                    <a href="###" class="cate_tri"></a>        </div>
-                                    <div class="cate_drop" style="display:none">
-                                        <ul>
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                            <li>4</li>
-                                        </ul>
+                                    <div style=" width: 130px;padding-left: 6px;font-size: 12px;color: #FFFFFF;line-height: 26px">停车信息</div>
+                                  
+                                </div>
+
+                            </div>
+                            <div class="cate">
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">请选择</option>
+                                    <option value="1">是</option>
+                                    <option value="2">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="css_content_group_selectItem_blank"></div>
+                        <div class="css_content_group_selectItem">
+                            <img class="css_content_group_selectItem_img" src="../Img/Img_five.png" alt="" />
+                            <div class="cate" style="float:left;">
+                                <div class="cate_wrp">
+                                    <div style=" width: 130px;padding-left: 6px;font-size: 12px;color: #FFFFFF;line-height: 26px">不等位服务</div>
+                                   
                                 </div>
                             </div>
                             <div class="cate">
-                                <div class="cate_wrp">
-                                    <div class="cate_inp cate_tri">选择菜系</div>
-                                    <a href="###" class="cate_tri"></a>        </div>
-                                <div class="cate_drop" style="display:none">
-                                    <ul>
-                                        <li>焦点图特效</li>
-                                        <li>菜单导航</li>
-                                        <li>flash素材</li>
-                                        <li>jquery特效</li>
-                                    </ul>
-                                </div>
+                                <select class="cate_drop dropdown" style="display:none">
+                                    <option value="0">请选择</option>
+                                    <option value="1">是</option>
+                                    <option value="2">否</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="css_content_group_selectItem_blank"></div>
-                        <div class="css_content_group_selectItem">
-                            <img class = "css_content_group_selectItem_img" src="../Img/Img_second.png" alt="" />
-                            <div class="cate" style="float:left;">
-                                <div class="cate_wrp">
-                                    <div class="cate_inp cate_tri">环境氛围</div>
-                                    <a href="###" class="cate_tri"></a>        </div>
-                                <div class="cate_drop" style="display:none">
-                                    <ul>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
-                                        <li>4</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="cate">
-                                <div class="cate_wrp">
-                                    <div class="cate_inp cate_tri">选择类目</div>
-                                    <a href="###" class="cate_tri"></a>        </div>
-                                <div class="cate_drop" style="display:none">
-                                    <ul>
-                                        <li>焦点图特效</li>
-                                        <li>菜单导航</li>
-                                        <li>flash素材</li>
-                                        <li>jquery特效</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="css_content_group_selectItem_blank"></div>
-                        <div class="css_content_group_selectItem">
-                        <img class = "css_content_group_selectItem_img" src="../Img/Img_third.png" alt="" />
-                        <div class="cate" style="float:left;">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">选择地区</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">选择地标</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="css_content_group_selectItem_blank"></div>
-                        <div class="css_content_group_selectItem">
-                        <img class = "css_content_group_selectItem_img" src="../Img/Img_four.png" alt="" />
-                        <div class="cate" style="float:left;">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">停车信息</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">是/否</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="css_content_group_selectItem_blank"></div>
-                        <div class="css_content_group_selectItem">
-                        <img class = "css_content_group_selectItem_img" src="../Img/Img_five.png" alt="" />
-                        <div class="cate" style="float:left;">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">不等位服务</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">是/否</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                     </div>
                     <div class="css_content_group_point">
                         <div class="css_content_group_point_name">餐厅亮点</div>
                         <div class="css_content_group_point_area">
-                            <textarea class="css_content_group_point_area"></textarea>
+                            <textarea id="restauranThighLights" class="css_content_group_point_area">餐厅亮点</textarea>
                         </div>
                     </div>
                 </div>
@@ -257,11 +221,11 @@
                     <div class="css_content_pictures_name">商户图片</div>
                     <div class="css_content_pictures_discription">上传图片最大单张不能超过5MB，只支持 jpg/png,可支持多张上传</div>
                     <div class="css_content_pictures_group">
-                        <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                        <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                        <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                        <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                        <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
+                        <li><img src="../Img/Img_UpLoadButton.png" /><div>图片上传</div></li>
+                        <li><img src="../Img/Img_UpLoadButton.png" /><div>图片上传</div></li>
+                        <li><img src="../Img/Img_UpLoadButton.png" /><div>图片上传</div></li>
+                        <li><img src="../Img/Img_UpLoadButton.png" /><div>图片上传</div></li>
+                        <li><img src="../Img/Img_UpLoadButton.png" /><div>图片上传</div></li>
                     </div>
                 </div>
                 <div class="css_content_preferential">
@@ -273,13 +237,13 @@
                         <div class="css_content_preferential_content_first">
                             <div class="css_content_preferential_content_first_header">首次优惠内容</div>
                             <div class="css_content_preferential_content_first_content">
-                                <textarea></textarea>
+                                <textarea id="firstOffer">首次优惠内容</textarea>
                             </div>
                         </div>
                         <div class="css_content_preferential_content_vip">
                             <div class="css_content_preferential_content_vip_header">标准优惠内容</div>
                             <div class="css_content_preferential_content_vip_content">
-                                <textarea></textarea>
+                                <textarea id="vipOffer">标准优惠内容</textarea>
                             </div>
                         </div>
                     </div>
@@ -293,6 +257,36 @@
         </div>
     </div>
     <script type="text/javascript" src="../JSLibrary/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="../JSLibrary/SelectControl.js"></script>
+    <script type="text/javascript" src="../JSLibrary/jquery.easydropdown.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#Js_Release").click(function () {
+                var businessId = $("#businessId").val();
+                var businessName = $("#businessName").val();
+                var businessAddress = $("#businessAddress").val();
+                var businessPhone = $("#businessPhone").val();
+                var businessHours = $("#businessHours").val();
+                var percapitaConsumption = $("#percapitaConsumption").val();
+                var restauranThighLights = $("#restauranThighLights").val();
+                var firstOffer = $("#firstOffer").val();
+                var vipOffer = $("#vipOffer").val();
+
+                $.ajax({
+                    type: "POST",   //访问WebService使用Post方式请求
+                    contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+                    url: "../WebService1.asmx/CreateBusiness", //调用WebService的地址和方法名称组合 ---- WsURL/方法名
+                    data: "{businessId:'" + businessId + "',businessName:'" + businessName + "',businessAddress:'" + businessAddress +
+                    "',businessPhone:'" + businessPhone + "',businessHours:'" + businessHours + "',percapitaConsumption:'" + percapitaConsumption +
+                    "',restauranThighLights:'" + restauranThighLights + "',firstOffer:'" + firstOffer + "',vipOffer:'" + vipOffer + "',businessTypeid:'" + 1 + "'}",         //这里是要传递的参数，格式为 data: "{paraName:paraValue}",下面将会看到
+                    dataType: 'json',
+                    success: function (result) {     //回调函数，result，返回值
+                        alert(result.d);
+                    }, error: function (x, e) {
+                        alert("error");
+                    }
+                })
+            });
+        })
+    </script>
 </body>
 </html>
