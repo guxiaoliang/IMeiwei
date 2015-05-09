@@ -105,5 +105,17 @@ namespace IMeiWeiWebService
 
             return "SUCCESS";
         }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string CreateImgs()
+        {
+            var request = HttpContext.Current.Request;
+            var imageData = request["data"];
+
+
+            return null;
+        }
+
     }
 }
