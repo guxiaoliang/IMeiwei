@@ -124,6 +124,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SysNode.cs" />
+    <Compile Include="ticket.cs" />
+    <Compile Include="ticketinfo.cs" />
     <Compile Include="user.cs" />
     <Compile Include="role.cs" />
   </ItemGroup>
