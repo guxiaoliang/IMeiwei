@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -79,10 +79,10 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>399</td>
-                            <td>12</td>
-                            <td>100</td>
-                            <td>20</td>
+                            <td><input style="text-align:center" type="text" id="js_VIPAmount" value="0"></td>
+                            <td><input style="text-align:center" type="text" id="js_VIPMouth" value="0"></td>
+                            <td><input style="text-align:center" type="text" id="js_AllelicAmount" value="0"></td>
+                            <td><input style="text-align:center" type="text" id="js_AlielicNumber" value="0"></td>
                         </tr>
                         </tbody>
 
@@ -93,8 +93,8 @@
             </div>
 
             <div class="css_button_groups">
-                <input class="button_cancel" type="button" value="取消" />
-                <input class="button_confirm" type="button" value="确认" />
+                <input id="js_btnCancel" class="button_cancel" type="button" value="取消" />
+                <input id="js_btnConfirm" class="button_confirm" type="button" value="确认" />
             </div>
 
 
@@ -107,5 +107,58 @@
 </div>
 <script type="text/javascript" src="../JSLibrary/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../JSLibrary/SelectControl.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $.ajax({
+            type: "POST", //访问WebService使用Post方式请求
+            contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+            url: "../WebService1.asmx/GetServiceSetting", //调用WebService
+            data: "{}", //Email参数
+            dataType: 'json',
+
+            error: function (x, e) {
+                alert("error");
+            },
+            success: function (response) { //回调函数，result，返回值
+                var jsonContext = JSON.parse(response.d);
+                $("#js_VIPAmount").val(jsonContext.VIPAmount);
+                $("#js_VIPMouth").val(jsonContext.VIPMouth);
+                $("#js_AllelicAmount").val(jsonContext.AllelicAmount);
+                $("#js_AlielicNumber").val(jsonContext.AlielicNumber);
+            }
+        });
+       
+    });
+    $("#js_btnConfirm").click(function () {
+        var vipAmount = $("#js_VIPAmount").val();
+        var vipMouth = $("#js_VIPMouth").val();
+        var allelicAmount = $("#js_AllelicAmount").val();
+        var alielicNumber = $("#js_AlielicNumber").val();
+        $.ajax({
+            type: "POST", //访问WebService使用Post方式请求
+            contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+            url: "../WebService1.asmx/SaveServiceSetting", //调用WebService
+            data: "{VIPAmount:'" + vipAmount + "',VIPMouth:'" + vipMouth + "',AllelicAmount:'" + allelicAmount + "',AlielicNumber:'" + alielicNumber + "'}", //Email参数
+            dataType: 'json',
+
+            error: function (x, e) {
+                alert("error");
+            },
+            success: function (response) { //回调函数，result，返回值
+                var jsonContext = JSON.parse(response.d);
+                $("#js_VIPAmount").val(jsonContext.VIPAmount);
+                $("#js_VIPMouth").val(jsonContext.VIPMouth);
+                $("#js_AllelicAmount").val(jsonContext.AllelicAmount);
+                $("#js_AlielicNumber").val(jsonContext.AlielicNumber);
+
+                alert("SUCCESS");
+            }
+        });
+    })
+
+   
+
+</script>
 </body>
 </html>

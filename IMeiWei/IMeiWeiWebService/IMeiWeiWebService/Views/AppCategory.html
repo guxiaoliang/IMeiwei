@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -67,10 +67,14 @@
                         <span>App类目</span>
                     </div>
                 </div>
-                <ul>
-                    <li><span>爱美味</span><div><a href="#">查看</a><a href="#">修改</a></div></li>
-                    <li><span>乐生活</span><div><a href="#">查看</a><a href="#">修改</a></div></li>
+                <ul id="js_content">
+                    
                 </ul>
+                <ul id="js_content">
+                    <li></li>
+
+                </ul>
+
             </div>
 
             <br>
@@ -82,5 +86,45 @@
 </div>
 <script type="text/javascript" src="../JSLibrary/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../JSLibrary/SelectControl.js"></script>
+    <script>
+        $(function () {
+                $.ajax({
+                    type: "POST", //访问WebService使用Post方式请求
+                    contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+                    url: "../WebService1.asmx/LoadBusinessTypes", //调用WebService
+                    data: "{}", //Email参数
+                    dataType: 'json',
+
+                    error: function (x, e) {
+                        alert("error");
+                    },
+                    success: function (response) { //回调函数，result，返回值
+                        var jsonContext = JSON.parse(response.d);
+                        var htmlText = "";
+                        $.each(jsonContext, function (index, item) {
+                            if (index == 0) {
+                                htmlText += "<li id=\""
+                               + item.Id
+                               + "\"><span>"
+                               + item.BusinessTypeName
+                               + "</span><div><a href=\"AppDishType.html\">查看</a><a href=\"AppDishType.html\">修改</a></div></li>";
+                            }
+                            else {
+                                htmlText += "<li id=\""
+                               + item.Id
+                               + "\"><span>"
+                               + item.BusinessTypeName
+                               + "</span><div><a href=\"APPEnjoyLife.html\">查看</a><a href=\"APPEnjoyLife.html\">修改</a></div></li>";
+                                
+                            }
+                           
+
+                        });
+                        $("#js_content").append(htmlText);
+                    }
+                })
+        })
+
+    </script>
 </body>
 </html>

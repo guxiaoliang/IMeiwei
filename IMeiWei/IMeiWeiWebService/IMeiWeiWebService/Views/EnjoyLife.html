@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="../Css/Navigation.css" type="text/css">
     <link rel="stylesheet" href="../Css/IDelicious.css" type="text/css">
+    <link rel="stylesheet" href="../Css/SelectControlCommon.css" type="text/css">
     <link rel="stylesheet" href="../Css/SelectControl.css" type="text/css">
+    <link rel="stylesheet" href="../Css/easydropdown.css" type="text/css">
 </head>
 <body>
 <div class="css_main">
@@ -64,192 +66,120 @@
             <div class="css_content_title">
                 <div class="css_content_title_item">
                     <div class="css_content_title_action">乐生活_商户创建</div>
-                    <div class="css_content_title_id">商户 ID：9876543210</div>
+                    <div class="css_content_title_id">商户 ID：<input id="businessId" style="border: none; height: 100%;background-color:none" type="text" value="" /></div>
                 </div>
                 <div class="css_content_title_button">
                     <input class="css_button css_button_reFill" type="button" value="重填" />
-                    <input class="css_button css_button_release" type="button" value="发布" />
+                    <input id="Js_Release" class="css_button css_button_release" type="button" value="发布" />
                 </div>
             </div>
             <div class="css_content_basicInfo">
                 <ul class="css_content_basicInfo_title">基本信息</ul>
                 <li class="css_content_basicInfo_item" style="padding-top:5px;">
                     <div class="css_content_basicInfo_item_name">商户名称</div>
-                    <div class="css_content_basicInfo_item_content" ></div>
+                    <div class="css_content_basicInfo_item_content">
+                        <input id="businessName" style="border: none; height: 100%;width: 100%" type="text" value="商户名称" />
+                    </div>
                 </li>
                 <li class="css_content_basicInfo_item">
                     <div class="css_content_basicInfo_item_name">联系地址</div>
-                    <div class="css_content_basicInfo_item_content" ></div>
+                    <div class="css_content_basicInfo_item_content">
+                        <input id="businessAddress" style="border: none; height: 100%;width: 100%" type="text" value="联系地址" />
+                    </div>
                 </li>
                 <li class="css_content_basicInfo_item">
                     <div class="css_content_basicInfo_item_name">联系电话</div>
-                    <div class="css_content_basicInfo_item_content" ></div>
+                    <div class="css_content_basicInfo_item_content">
+                        <input id="businessPhone" style="border: none; height: 100%;width: 100%" type="text" value="联系电话" />
+                    </div>
                 </li>
                 <li class="css_content_basicInfo_item">
                     <div class="css_content_basicInfo_item_name">营业时间</div>
-                    <div class="css_content_basicInfo_item_content" ></div>
+                    <div class="css_content_basicInfo_item_content">
+                        <input id="businessHours" style="border: none; height: 100%;width: 100%" type="text" value="营业时间" />
+                    </div>
                 </li>
                 <li class="css_content_basicInfo_item">
                     <div class="css_content_basicInfo_item_name" style="border-bottom: none">人均消费</div>
-                    <div class="css_content_basicInfo_item_content" style="border-bottom: none"></div>
+                    <div class="css_content_basicInfo_item_content" style="border-bottom: none">
+                        <input id="percapitaConsumption" style="border: none; height: 100%;width: 100%" type="text" value="1222" />
+                    </div>
                 </li>
             </div>
             <div class="css_content_group">
                 <div class="css_content_group_selectItems">
                     <div class="css_content_group_selectItem">
                         <img class = "css_content_group_selectItem_img" src="../Img/Img_first.png" alt="" />
-                        <div class="cate" style="float:left;">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">主营项目</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
-                            </div>
+                        <div id="js_classOneParent" class="cate" style="float:left;">
+                            <select id="js_classOne" class="cate_drop dropdown" onchange="changeCaixivalue()" style="display:none">
+                                <option value="0">主营类目</option>
+                                <option value="1">类目1</option>
+                                <option value="2">类目2</option>
+                                <option value="3">类目3</option>
+                                <option value="4">类目4</option>
+                            </select>
                         </div>
-                        <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">选择地区</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
+                        <div id="js_classTwoParent" class="cate">
+                            <select class="cate_drop dropdown" onchange="onTwoLevel()" style="display:none">
+                                <option value="0">请选择类别</option>
+                                <option value="1">类别1</option>
+                                <option value="2">类别2</option>
+                                <option value="3">类别3</option>
+                                <option value="4">类别4</option>
+                            </select>
                         </div>
+                       
                     </div>
                     <div class="css_content_group_selectItem_blank"></div>
                     <div class="css_content_group_selectItem">
-                        <img class = "css_content_group_selectItem_img" src="../Img/Img_second.png" alt="" />
+                        <img class="css_content_group_selectItem_img" src="../Img/Img_third.png" alt="" />
+                        <div class="cate" style="float:left;">
+                            <select id="js_areaOne" class="cate_drop dropdown" onchange="changeAreavalue()" style="display:none">
+                                <option value="0">请选择城市</option>
+                                <option value="1">黄埔区</option>
+                                <option value="2">浦东新区</option>
+                                <option value="3">闵行区</option>
+                                <option value="4">普陀区</option>
+                            </select>
+                        </div>
+                        <div id="js_areaTwoParent" class="cate">
+                            <select onchange="onTwoLevel()" class="cate_drop dropdown" style="display:none">
+                                <option value="0">请选择县区</option>
+                                <option value="1">地标一</option>
+                                <option value="2">地标二</option>
+                                <option value="3">地标三</option>
+                                <option value="4">地标四</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="css_content_group_selectItem_blank"></div>
+                    <div class="css_content_group_selectItem">
+                        <img class="css_content_group_selectItem_img" src="../Img/Img_four.png" alt="" />
                         <div class="cate" style="float:left;">
                             <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">停车信息</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
+                                <div style=" width: 130px;padding-left: 6px;font-size: 12px;color: #FFFFFF;line-height: 26px">停车信息</div>
+
                             </div>
+
                         </div>
                         <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">选择类目</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
+                            <select id="js_Park" class="cate_drop dropdown" onchange="onTwoLevel()" style="display:none">
+                                <option value="0">请选择</option>
+                                <option value="true">是</option>
+                                <option value="false">否</option>
+                            </select>
                         </div>
                     </div>
                     <div class="css_content_group_selectItem_blank"></div>
-                    <div class="css_content_group_selectItem">
-                        <img class = "css_content_group_selectItem_img" src="../Img/Img_third.png" alt="" />
-                        <div class="cate" style="float:left;">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">选择地区</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">选择地标</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="css_content_group_selectItem" style="visibility:hidden"></div>
                     <div class="css_content_group_selectItem_blank"></div>
-                    <div class="css_content_group_selectItem">
-                        <img class = "css_content_group_selectItem_img" src="../Img/Img_four.png" alt="" />
-                        <div class="cate" style="float:left;">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">停车信息</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">是/否</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="css_content_group_selectItem_blank"></div>
-                    <div class="css_content_group_selectItem">
-                        <img class = "css_content_group_selectItem_img" src="../Img/Img_five.png" alt="" />
-                        <div class="cate" style="float:left;">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">不等位服务</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cate">
-                            <div class="cate_wrp">
-                                <div class="cate_inp cate_tri">是/否</div>
-                                <a href="###" class="cate_tri"></a>        </div>
-                            <div class="cate_drop" style="display:none">
-                                <ul>
-                                    <li>焦点图特效</li>
-                                    <li>菜单导航</li>
-                                    <li>flash素材</li>
-                                    <li>jquery特效</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="css_content_group_selectItem" style="visibility:hidden"></div>
                 </div>
                 <div class="css_content_group_point">
                     <div class="css_content_group_point_name">餐厅亮点</div>
                     <div class="css_content_group_point_area">
-                        <textarea class="css_content_group_point_area"></textarea>
+                        <textarea id="restauranThighLights" class="css_content_group_point_area">餐厅亮点</textarea>
                     </div>
                 </div>
             </div>
@@ -257,11 +187,11 @@
                 <div class="css_content_pictures_name">商户图片</div>
                 <div class="css_content_pictures_discription">上传图片最大单张不能超过5MB，只支持 jpg/png,可支持多张上传</div>
                 <div class="css_content_pictures_group">
-                    <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                    <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                    <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                    <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
-                    <li><img src="../Img/Img_UpLoadButton.png"/><div>图片上传</div></li>
+                    <ul id="container1"><li><img class="css_ImageButton" id="pickfiles1" src="../Img/Img_UpLoadButton.png" /><div><span>图片上传</span><img style="visibility:hidden" /></div></li></ul>
+                    <ul id="container2"><li><img class="css_ImageButton" id="pickfiles2" src="../Img/Img_UpLoadButton.png" /><div><span>图片上传</span><img style="visibility:hidden" /></div></li></ul>
+                    <ul id="container3"><li><img class="css_ImageButton" id="pickfiles3" src="../Img/Img_UpLoadButton.png" /><div><span>图片上传</span><img style="visibility:hidden" /></div></li></ul>
+                    <ul id="container4"><li><img class="css_ImageButton" id="pickfiles4" src="../Img/Img_UpLoadButton.png" /><div><span>图片上传</span><img style="visibility:hidden" /></div></li></ul>
+                    <ul id="container5"><li><img class="css_ImageButton" id="pickfiles5" src="../Img/Img_UpLoadButton.png" /><div><span>图片上传</span><img style="visibility:hidden" /></div></li></ul>
                 </div>
             </div>
             <div class="css_content_preferential">
@@ -273,18 +203,36 @@
                     <div class="css_content_preferential_content_first">
                         <div class="css_content_preferential_content_first_header">首次优惠内容</div>
                         <div class="css_content_preferential_content_first_content">
-                            <textarea></textarea>
+                            <textarea id="firstOffer">首次优惠内容</textarea>
                         </div>
                     </div>
                     <div class="css_content_preferential_content_vip">
                         <div class="css_content_preferential_content_vip_header">标准优惠内容</div>
                         <div class="css_content_preferential_content_vip_content">
-                            <textarea></textarea>
-                        </div>
+                        <textarea id="vipOffer">标准优惠内容</textarea>
+                    </div>
                     </div>
                 </div>
             </div>
+            <div class="css_content_group">
+                <div class="css_content_group_selectItem" style="float:left">
+                    <div class="cate" style="float:left;">
+                        <div class="cate_wrp">
+                            <div style=" width: 130px;padding-left: 16px;font-size: 12px;color: #FFFFFF;line-height: 26px">发送方式</div>
 
+                        </div>
+
+                    </div>
+                    <div class="cate">
+                        <select id="js_senderType" class="cate_drop dropdown" onchange="onTwoLevel()" style="display:none">
+                            <option value="0">请选择</option>
+                            <option value="true">短信</option>
+                            <option value="false">邮件</option>
+                        </select>
+                    </div>
+                </div>
+                <div> <input id="js_senderTypeContent" type="text" style="height:40px;width:58%" /></div>
+            </div>
             <br>
             <br>
             <br>
@@ -292,7 +240,308 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="../JSLibrary/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="../JSLibrary/SelectControl.js"></script>
+    <script type="text/javascript" src="../JSLibrary/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../JSLibrary/plupload.full.min.js"></script>
+    <script type="text/javascript" src="../JSLibrary/jquery.Jcrop.min.js"></script>
+    <script type="text/javascript">
+        var fileName = "";
+        var businessId = getUrlParam("businessId");
+
+        $(function () {
+
+            SetUpLoad(1);
+            SetUpLoad(2);
+            SetUpLoad(3);
+            SetUpLoad(4);
+            SetUpLoad(5);
+
+            $.ajax({
+                type: "POST", //访问WebService使用Post方式请求
+                contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+                url: "../WebServices/IDeliciousWebService.asmx/GetBusinessInfoModel", //调用WebService
+                data: "{businessTypeId:'EF74E123-455B-461F-83B3-E2C0D46AFA09'" + ",businessId:'" + businessId + "'}", //Email参数
+                dataType: 'json',
+                async: false,
+
+                error: function (x, e) {
+                    alert("error");
+                },
+                success: function (response) { //回调函数，result，返回值
+                    var jsonContext = JSON.parse(response.d);
+                    $("#businessId").val(jsonContext.BusinessId);
+                    $("#businessName").val(jsonContext.BusinessName);
+                    $("#businessAddress").val(jsonContext.BusinessAddress);
+                    $("#businessPhone").val(jsonContext.BusinessPhone);
+                    $("#businessHours").val(jsonContext.BusinessHours);
+                    $("#percapitaConsumption").val(jsonContext.PercapitaConsumption);
+                    $("#restauranThighLights").val(jsonContext.RestauranThighLights);
+                    $("#firstOffer").val(jsonContext.FirstOffer);
+                    $("#vipOffer").val(jsonContext.VIPOffer);
+                    $("#js_classOne").empty();
+                    $("#js_classOne").append("<option value=\"0\">主营类目</option>");
+                    $("#js_classTwoParent").empty();
+                    $.each(jsonContext.AppDishTypes, function (index, item) {
+                        $("#js_classOne").append("<option value=\"" + index + "\">" + item + "</option>");
+                        var detail = "";
+                        $.each(jsonContext.AppCuisines, function (index1, item1) {
+                            if (index == item1.Id) {
+                                detail += "<div id = \"" + index + "_item\"><select id=\"" + index + "\" class=\"cate_drop dropdown\" onchange=\"onCaixiTwoChange(this)\" style=\"display:none;\">";
+                                detail += "<option value=\"0\">请选择类别</option>";
+                                $.each(item1.KeyValues, function (index2, item2) {
+                                    detail += "<option value=\"" + index2 + "\">" + item2 + "</option>";
+                                });
+                            }
+                            detail += "</select></div>";
+
+                        });
+                        $("#js_classTwoParent").append(detail);
+                    });
+
+                    $("#js_areaOne").empty();
+                    $("#js_areaOne").append("<option value=\"0\">请选择城市</option>");
+                    $("#js_areaTwoParent").empty();
+                    $.each(jsonContext.AreaOnes, function (index, item) {
+                        $("#js_areaOne").append("<option value=\"" + index + "\">" + item + "</option>");
+                        var detail = "";
+                        $.each(jsonContext.AreaTwoes, function (index1, item1) {
+                            if (index == item1.Id) {
+                                detail += "<select id=\"" + index + "\" class=\"cate_drop dropdown\" onchange=\"onAreaTwoChange(this)\" style=\"display:none;\">";
+                                detail += "<option value=\"0\">请选择县区</option>";
+                                $.each(item1.KeyValues, function (index2, item2) {
+                                    detail += "<option value=\"" + index2 + "\">" + item2 + "</option>";
+                                });
+                            }
+                            detail += "</select>";
+
+                        });
+                        $("#js_areaTwoParent").append(detail);
+                    });
+
+                    $("#js_scencOne").empty();
+                    $("#js_scencOne").append("<option value=\"0\">请选择场景</option>");
+                    $.each(jsonContext.SceneOnes, function (index, item) {
+                        $("#js_scencOne").append("<option value=\"" + index + "\">" + item + "</option>");
+                    });
+
+                    $("#js_senderType").empty();
+                    $("#js_senderType").append("<option value=\"0\">请选择发送方式</option>");
+                    $.each(jsonContext.BusinessSenderTypes, function (index, item) {
+                        $("#js_senderType").append("<option value=\"" + index + "\">" + item + "</option>");
+                    });
+
+                    $("#js_Park").val(jsonContext.IsPark.toString());
+
+                    if (jsonContext.AppDishTypeId != "" && null != jsonContext.AppDishTypeId) {
+                        $("#js_classOne").val(jsonContext.AppDishTypeId);
+                    }
+                    if (jsonContext.AppCuisineId != "" && null != jsonContext.AppCuisineId) {
+                        $("#" + jsonContext.AppDishTypeId).val(jsonContext.AppCuisineId);
+                    }
+
+                    if (jsonContext.SenderTypeId != "" && null != jsonContext.SenderTypeId) {
+                        $("#js_senderType").val(jsonContext.SenderTypeId);
+                    }
+                    if (jsonContext.SenderContent != "" && null != jsonContext.SenderContent) {
+                        $("#js_senderTypeContent").val(jsonContext.SenderContent);
+                    }
+
+                    if (jsonContext.AreaOneId != "" && jsonContext.AreaOneId != null) {
+                        $("#js_areaOne").val(jsonContext.AreaOneId);
+                    }
+                    if (jsonContext.AreaTwoId != "" && jsonContext.AreaTwoId != null) {
+                        $("#" + jsonContext.AreaOneId).val(jsonContext.AreaTwoId);
+                    }
+                    if (jsonContext.PicturePath1 != "" && null != jsonContext.PicturePath1) {
+                        var picPath = "../Uploads/" + jsonContext.PicturePath1;
+                        $('#container1 div span').remove();
+                        $('#container1 div img').attr('src', picPath);
+                        $('#container1 div img').attr('style', "width:140px;height:108px;visibility:visible");
+                    }
+                    if (jsonContext.PicturePath2 != "" && null != jsonContext.PicturePath2) {
+                        var picPath = "../Uploads/" + jsonContext.PicturePath2;
+                        $('#container2 div span').remove();
+                        $('#container2 div img').attr('src', picPath);
+                        $('#container2 div img').attr('style', "width:140px;height:108px;visibility:visible");
+                    }
+                    if (jsonContext.PicturePath3 != "" && null != jsonContext.PicturePath3) {
+                        var picPath = "../Uploads/" + jsonContext.PicturePath3;
+                        $('#container3 div span').remove();
+                        $('#container3 div img').attr('src', picPath);
+                        $('#container3 div img').attr('style', "width:140px;height:108px;visibility:visible");
+                    }
+                    if (jsonContext.PicturePath4 != "" && null != jsonContext.PicturePath4) {
+                        var picPath = "../Uploads/" + jsonContext.PicturePath4;
+                        $('#container4 div span').remove();
+                        $('#container4 div img').attr('src', picPath);
+                        $('#container4 div img').attr('style', "width:140px;height:108px;visibility:visible");
+                    }
+                    if (jsonContext.PicturePath5 != "" && null != jsonContext.PicturePath5) {
+                        var picPath = "../Uploads/" + jsonContext.PicturePath5;
+                        $('#container5 div span').remove();
+                        $('#container5 div img').attr('src', picPath);
+                        $('#container5 div img').attr('style', "width:140px;height:108px;visibility:visible");
+                    }
+                }
+            });
+
+            if ($("#js_classOne").val() == "0") {
+                $("#js_classTwoParent").css("visibility", "hidden");
+            }
+            else {
+                $("#js_classTwoParent").children().css("visibility", "hidden");
+                //$("#js_classTwoParent").children().hide();
+                $("#" + $("#js_classOne").val() + "_item").css("visibility", "visible");
+                $("#" + $("#js_classOne").val() + "_item").show();
+            }
+            if ($("#js_areaOne").val() == "0") {
+                $("#js_areaTwoParent").css("visibility", "hidden");
+            }
+        });
+
+        function SetUpLoad(orderNo) {
+            var jcrop_api;
+            var uploadCount = 0;
+
+            var uploader = new plupload.Uploader({
+                runtimes: 'html5,flash,silverlight,html4',
+                browse_button: 'pickfiles' + orderNo, // you can pass in id...
+                container: document.getElementById('container' + orderNo), // ... or DOM Element itself
+                url: '../WebService1.asmx/CreateImgs',
+                flash_swf_url: '../js/Upload.aspx.swf',
+                silverlight_xap_url: '../js/Moxie.xap',
+                multipart_params: { 'businessId': '', 'order': '' },
+
+                filters: {
+                    max_file_size: '5mb',
+                    mime_types: [
+                        { title: "Image files", extensions: "jpg,gif,png" },
+                        { title: "Zip files", extensions: "zip" }
+                    ]
+                },
+
+                init: {
+                    FilesAdded: function (up, file) {
+                        var businessId = $("#businessId").val();
+                        uploader.settings.multipart_params.businessId = businessId;
+                        uploader.settings.multipart_params.order = orderNo;
+                        up.start();
+                    },
+
+                    UploadProgress: function (up, file) {
+
+                        $("#Progress").html("长传进度" + file.percent + "%");
+                    },
+
+                    Error: function (up, err) {
+                        document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+                    },
+
+                    FileUploaded: function (up, file, info) {
+
+                        var picPath = "../Uploads/" + info.response;
+                        fileName = info.response;
+                        $('#container' + orderNo + ' div span').remove();
+                        $('#container' + orderNo + ' div img').attr('src', picPath);
+                        $('#container' + orderNo + ' div img').attr('style', "width:140px;height:108px;visibility:visible");
+                    },
+                }
+            });
+
+            uploader.init();
+        };
+        function guid() {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        };
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        };
+    </script>
+<script type="text/javascript" src="../JSLibrary/jquery.easydropdown.js"></script>
+
+    <script type="text/javascript">
+        var appDishTypes = $("#js_classOne").val();
+        var areaOne = $("#js_areaOne").val();
+
+        var areaOneId = $("#js_areaOne").val();
+        var areaTwoId = "";
+        var caixiOneId = $("#js_classOne").val();
+        var caixiTwoId = "";
+        var scencOneId = "";
+        var isPark = "";
+        var isAllelic = "";
+
+        function changeCaixivalue() {
+            $("#js_classOne").parent().parent().parent().next().children().hide();
+            $("#" + appDishTypes).hide();
+            appDishTypes = $("#js_classOne").val();
+            $("#" + appDishTypes + "_item").css("visibility", "visible");
+            $("#" + appDishTypes + "_item").show();
+            $("#" + appDishTypes).easyDropDown('enable');
+            $("#" + appDishTypes).parent().parent().show();
+            onTwoLevel();
+        }
+        function changeAreavalue() {
+            $("#js_areaOne").parent().parent().parent().next().children().hide();
+            $("#" + areaOne).hide();
+            areaOne = $("#js_areaOne").val();
+            $("#js_areaTwoParent").css("visibility", "visible");
+            $("#" + areaOne).easyDropDown('enable');
+            $("#" + areaOne).parent().parent().show();
+            onTwoLevel();
+        }
+
+        $("#Js_Release").click(function () {
+            var businessId = $("#businessId").val();
+            var businessName = $("#businessName").val();
+            var businessAddress = $("#businessAddress").val();
+            var businessPhone = $("#businessPhone").val();
+            var businessHours = $("#businessHours").val();
+            var percapitaConsumption = $("#percapitaConsumption").val();
+            var restauranThighLights = $("#restauranThighLights").val();
+            var firstOffer = $("#firstOffer").val();
+            var vipOffer = $("#vipOffer").val();
+            var senderTypeId = $("#js_senderType").val();
+            var senderTypeContent = $("#js_senderTypeContent").val();
+
+            $.ajax({
+                type: "POST",   //访问WebService使用Post方式请求
+                contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+                url: "../WebService1.asmx/CreateBusiness", //调用WebService的地址和方法名称组合 ---- WsURL/方法名
+                data: "{businessId:'" + businessId + "',businessName:'" + businessName + "',businessAddress:'" + businessAddress +
+                "',businessPhone:'" + businessPhone + "',businessHours:'" + businessHours + "',percapitaConsumption:'" + percapitaConsumption +
+                "',restauranThighLights:'" + restauranThighLights + "',firstOffer:'" + firstOffer + "',vipOffer:'" + vipOffer + "',businessTypeid:'" + "EF74E123-455B-461F-83B3-E2C0D46AFA09"
+                + "',areaOneId:'" + areaOneId + "',areaTwoId:'" + areaTwoId + "',caixiOneId:'" + caixiOneId + "',caixiTwoId:'" + caixiTwoId + "',scencOneId:'" + scencOneId
+                + "',isPark:'" + isPark + "',isAllelic:'" + isAllelic + "',senderTypeId:'" + senderTypeId + "',senderTypeContent:'" + senderTypeContent + "'}",         //这里是要传递的参数，格式为 data: "{paraName:paraValue}",下面将会看到
+                dataType: 'json',
+                success: function (result) {     //回调函数，result，返回值
+                    alert(result.d);
+                }, error: function (x, e) {
+                    alert("error");
+                }
+            })
+        });
+
+        function onTwoLevel() {
+            areaOneId = $("#js_areaOne").val();
+            caixiOneId = $("#js_classOne").val();
+            scencOneId = $("#js_scencOne").val();
+            isPark = $("#js_Park").val();
+            isAllelic = $("#js_Allelic").val();
+        };
+
+        function onAreaTwoChange(item) {
+            areaTwoId = item.value;
+            onTwoLevel();
+        };
+        function onCaixiTwoChange(item) {
+            caixiTwoId = item.value;
+            onTwoLevel();
+        };
+    </script>
 </body>
 </html>

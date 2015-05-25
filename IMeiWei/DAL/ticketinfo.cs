@@ -21,9 +21,10 @@ namespace IMeiWei.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select count(1) from ticketinfo");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20)			};
+					new MySqlParameter("@Id", MySqlDbType.Int64)
+			};
 			parameters[0].Value = Id;
 
 			return DbHelperMySQL.Exists(strSql.ToString(),parameters);
@@ -37,24 +38,22 @@ namespace IMeiWei.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into ticketinfo(");
-			strSql.Append("Id,TicketId,Code,UseTime,Status,MappingUserId,MappingUserPhone)");
+			strSql.Append("TicketReferenceId,Code,UseTime,Status,MappingUserId,MappingUserPhone)");
 			strSql.Append(" values (");
-			strSql.Append("@Id,@TicketId,@Code,@UseTime,@Status,@MappingUserId,@MappingUserPhone)");
+			strSql.Append("@TicketReferenceId,@Code,@UseTime,@Status,@MappingUserId,@MappingUserPhone)");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20),
-					new MySqlParameter("@TicketId", MySqlDbType.Int64,20),
+					new MySqlParameter("@TicketReferenceId", MySqlDbType.VarChar,36),
 					new MySqlParameter("@Code", MySqlDbType.VarChar,255),
 					new MySqlParameter("@UseTime", MySqlDbType.DateTime),
 					new MySqlParameter("@Status", MySqlDbType.VarChar,255),
 					new MySqlParameter("@MappingUserId", MySqlDbType.Int64,20),
 					new MySqlParameter("@MappingUserPhone", MySqlDbType.VarChar,255)};
-			parameters[0].Value = model.Id;
-			parameters[1].Value = model.TicketId;
-			parameters[2].Value = model.Code;
-			parameters[3].Value = model.UseTime;
-			parameters[4].Value = model.Status;
-			parameters[5].Value = model.MappingUserId;
-			parameters[6].Value = model.MappingUserPhone;
+			parameters[0].Value = model.TicketReferenceId;
+			parameters[1].Value = model.Code;
+			parameters[2].Value = model.UseTime;
+			parameters[3].Value = model.Status;
+			parameters[4].Value = model.MappingUserId;
+			parameters[5].Value = model.MappingUserPhone;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -73,22 +72,22 @@ namespace IMeiWei.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update ticketinfo set ");
-			strSql.Append("TicketId=@TicketId,");
+			strSql.Append("TicketReferenceId=@TicketReferenceId,");
 			strSql.Append("Code=@Code,");
 			strSql.Append("UseTime=@UseTime,");
 			strSql.Append("Status=@Status,");
 			strSql.Append("MappingUserId=@MappingUserId,");
 			strSql.Append("MappingUserPhone=@MappingUserPhone");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@TicketId", MySqlDbType.Int64,20),
+					new MySqlParameter("@TicketReferenceId", MySqlDbType.VarChar,36),
 					new MySqlParameter("@Code", MySqlDbType.VarChar,255),
 					new MySqlParameter("@UseTime", MySqlDbType.DateTime),
 					new MySqlParameter("@Status", MySqlDbType.VarChar,255),
 					new MySqlParameter("@MappingUserId", MySqlDbType.Int64,20),
 					new MySqlParameter("@MappingUserPhone", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Id", MySqlDbType.Int64,20)};
-			parameters[0].Value = model.TicketId;
+			parameters[0].Value = model.TicketReferenceId;
 			parameters[1].Value = model.Code;
 			parameters[2].Value = model.UseTime;
 			parameters[3].Value = model.Status;
@@ -115,9 +114,10 @@ namespace IMeiWei.DAL
 			
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("delete from ticketinfo ");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20)			};
+					new MySqlParameter("@Id", MySqlDbType.Int64)
+			};
 			parameters[0].Value = Id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
@@ -157,10 +157,11 @@ namespace IMeiWei.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,TicketId,Code,UseTime,Status,MappingUserId,MappingUserPhone from ticketinfo ");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append("select Id,TicketReferenceId,Code,UseTime,Status,MappingUserId,MappingUserPhone from ticketinfo ");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20)			};
+					new MySqlParameter("@Id", MySqlDbType.Int64)
+			};
 			parameters[0].Value = Id;
 
 			IMeiWei.Model.ticketinfo model=new IMeiWei.Model.ticketinfo();
@@ -188,9 +189,9 @@ namespace IMeiWei.DAL
 				{
 					model.Id=long.Parse(row["Id"].ToString());
 				}
-				if(row["TicketId"]!=null && row["TicketId"].ToString()!="")
+				if(row["TicketReferenceId"]!=null)
 				{
-					model.TicketId=long.Parse(row["TicketId"].ToString());
+					model.TicketReferenceId=row["TicketReferenceId"].ToString();
 				}
 				if(row["Code"]!=null)
 				{
@@ -222,7 +223,7 @@ namespace IMeiWei.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,TicketId,Code,UseTime,Status,MappingUserId,MappingUserPhone ");
+			strSql.Append("select Id,TicketReferenceId,Code,UseTime,Status,MappingUserId,MappingUserPhone ");
 			strSql.Append(" FROM ticketinfo ");
 			if(strWhere.Trim()!="")
 			{

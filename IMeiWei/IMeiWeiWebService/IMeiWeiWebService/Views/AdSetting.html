@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -359,25 +359,26 @@
 
                     <div class="css_content_pictures_discription">启动广告</div>
                     <div class="css_content_pictures_group">
-                        <li style="height: 180px; line-height: 180px">
-                            <img src="../Img/Img_UpLoadButton.png"/>
-                            <div>图片上传</div>
-                        </li>
+                        <ul id="container1">
+                            <li style="height: 180px; line-height: 180px">
+                                <img id="pickfiles1" src="../Img/Img_UpLoadButton.png" />
+                                <div>
+                                    <span>图片上传</span><img style="visibility:hidden" />
+                                </div>
+                            </li>
+                        </ul>
                         <table style="padding-left: 10px">
                             <tbody>
-                                <tr><td>商户ID:</td><td></td><td style="border:none;"></td></tr>
-                                <tr><td>链接:</td><td></td><td style="border:none;"></td></tr>
-                                <tr><td>截止时间:</td><td></td></tr>
+                                <tr><td>商户ID:</td><td><input id="js_start_businessId" type="radio" name="a" checked /></td><td style="border:none;"></td></tr>
+                                <tr><td>链接:</td><td><input id="js_start_link" type="radio" name="a" checked /></td><td style="border:none;"></td></tr>
+                                <tr><td colspan="2"><span style="float:left">发布时间:</span><input id="js_start_limit_time" type="text" value="2015.03.01" /></td></tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="css_button_contain">
-                        <input class="css_button_confirm" type="button" value="确认" />
+                        <input id="js_confirm" class="css_button_confirm" type="button" value="确认" />
                     </div>
                 </div>
-
-
-
             </div>
 
 
@@ -392,5 +393,97 @@
 </div>
 <script type="text/javascript" src="../JSLibrary/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../JSLibrary/SelectControl.js"></script>
+<script type="text/javascript" src="../JSLibrary/plupload.full.min.js"></script>
+<script type="text/javascript" src="../JSLibrary/jquery.Jcrop.min.js"></script>
+    <script type="text/javascript">
+        var fileName = "";
+        var adSetting_Id = guid();
+        var new_adSetting_Id = adSetting_Id;
+
+        $(function () {
+
+            SetUpLoad(1);
+        })
+
+        function SetUpLoad(orderNo) {
+            var jcrop_api;
+            var uploadCount = 0;
+
+            var uploader = new plupload.Uploader({
+                runtimes: 'html5,flash,silverlight,html4',
+                browse_button: 'pickfiles' + orderNo, // you can pass in id...
+                container: document.getElementById('container' + orderNo), // ... or DOM Element itself
+                url: '../WebService1.asmx/SaveAdImgs',
+                flash_swf_url: '../js/Upload.aspx.swf',
+                silverlight_xap_url: '../js/Moxie.xap',
+                multipart_params: { 'adSetting_Id': '' },
+
+                filters: {
+                    max_file_size: '5mb',
+                    mime_types: [
+                        { title: "Image files", extensions: "jpg,gif,png" },
+                        { title: "Zip files", extensions: "zip" }
+                    ]
+                },
+
+                init: {
+                    FilesAdded: function (up, file) {
+                        uploader.settings.multipart_params.adSetting_Id = adSetting_Id;
+                        up.start();
+                    },
+
+                    UploadProgress: function (up, file) {
+
+                        $("#Progress").html("长传进度" + file.percent + "%");
+                    },
+
+                    Error: function (up, err) {
+                        document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+                    },
+
+                    FileUploaded: function (up, file, info) {
+
+                        var picPath = "../Uploads/" + info.response;
+                        fileName = info.response;
+                        $('#container' + orderNo + ' div span').remove();
+                        $('#container' + orderNo + ' div img').attr('src', picPath);
+                        $('#container' + orderNo + ' div img').attr('style', "width:140px;height:108px;visibility:visible");
+
+                    },
+                }
+            });
+
+            uploader.init();
+        };
+
+        $("#js_confirm").click(function () {
+            var id = adSetting_Id;
+            var flag = "true";
+            var businessId = "";
+            var adType = "";
+            $.ajax({
+                type: "POST", //访问WebService使用Post方式请求
+                contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+                url: "../WebService1.asmx/CreateAdSettings", //调用WebService
+                data: "{id:'" + id + "',flag:'" + flag + "',adType:'" + adType + "',businessId:'" + businessId + "'}", //Email参数
+                dataType: 'json',
+
+                error: function (x, e) {
+                    alert("error");
+                },
+                success: function (response) { //回调函数，result，返回值
+                    alert(response.d);
+                }
+            })
+        })
+
+        function guid() {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        };
+
+    </script>
 </body>
 </html>

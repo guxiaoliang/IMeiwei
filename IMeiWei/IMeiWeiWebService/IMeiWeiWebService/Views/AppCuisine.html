@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -75,14 +75,14 @@
                 <div class="css_content_userTable_search">
                     <div class="css_content_userTable_search_content">
                         <span>添加菜系</span>
-                        <input class="css_input_text" type="text" />
-                        <input class="css_input_button" type="button" value="添  加"/>
+                        <input id="js_name" class="css_input_text" type="text" />
+                        <input id="js_add" class="css_input_button" type="button" value="添  加" />
                     </div>
                     <div class="css_content_userTable_search_button">
-                        <input type="button" value="保  存"/>
+                        <input id="js_save" type="button" value="保  存" />
                     </div>
                 </div>
-                <div class="css_content_ul">
+                <div id="js_content_ul" class="css_content_ul">
                     <ul>
                         <li class="css_content_ul_li css_li_border_left css_li_border_top "><span>川菜</span><div><a href="#">修改</a><a href="#">删除</a></div></li>
                         <li class="css_content_ul_li css_li_border_top"><span>火锅</span><div><a href="#">修改</a><a href="#">删除</a></div></li>
@@ -109,5 +109,160 @@
 </div>
 <script type="text/javascript" src="../JSLibrary/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../JSLibrary/SelectControl.js"></script>
+    <script>
+        var businesstypeclassOneId = getUrlParam("businesstypeclassOneId");
+        $(function () {
+            $.ajax({
+                type: "POST", //访问WebService使用Post方式请求
+                contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+                url: "../WebService1.asmx/LoadClassTwoItems", //调用WebService
+                data: "{businesstypeclassOneId:'" + businesstypeclassOneId + "'}", //Email参数
+                dataType: 'json',
+
+                error: function (x, e) {
+                    alert("error");
+                },
+                success: function (response) { //回调函数，result，返回值
+                    $('#js_content_ul').empty();
+                    var htmlText = "";
+                    var jsonContext = JSON.parse(response.d);
+                    var lineCount = 0;
+                    var columnCount = 0;
+                    var lines = jsonContext.length;
+                    $.each(jsonContext, function (index, item) {
+                        var classContent = "css_content_ul_li ";
+                        if (index % 5 == 0) {
+                            htmlText += "<ul>";
+                        }
+                        if (columnCount == 0) {
+                            classContent += "css_li_border_left ";
+                        }
+                        if (columnCount == 4) {
+                            classContent += "css_li_border_right ";
+                        }
+                        if (lineCount == 0) {
+                            classContent += "css_li_border_top";
+                        }
+                        if (lineCount + 1 == lines) {
+                            classContent += "css_li_border_bottom";
+                        }
+                        htmlText += "<li Id=\"" + item.Id
+                            + "\" class=\"" + classContent + "\"><span>"
+                            + item.BusinessTypeClassTwoName
+                            + " </span><div><a href=\"#\">修改</a><a href=\"#\">删除</a></div></li>";
+                        columnCount++;
+                        if (jsonContext.length == index + 1 && columnCount % 5 != 4) {
+                            var count = 5 - columnCount % 5;
+                            for (var j = 0; j < count; j++) {
+                                if (j == count - 1) {
+                                    if (lineCount == 0) {
+                                        htmlText += "<li class=\"js_blank css_content_ul_li css_li_border_right css_li_border_top css_li_border_bottom\"></li>";
+                                    }
+                                    else {
+                                        htmlText += "<li class=\"js_blank css_content_ul_li css_li_border_right css_li_border_bottom\"></li>";
+                                    }
+                                } else {
+                                    if (lineCount == 0) {
+                                        htmlText += "<li class=\"js_blank css_content_ul_li css_li_border_right css_li_border_top css_li_border_bottom\"></li>";
+                                    }
+                                    else {
+                                        htmlText += "<li class=\"js_blank css_content_ul_li css_li_border_bottom\"></li>";
+                                    }
+
+                                }
+                            }
+                        }
+
+                        if (index % 5 == 4) {
+                            htmlText += "</ul>";
+                            columnCount = 0;
+                            lineCount++;
+                        }
+                    });
+                    $('#js_content_ul').append(htmlText);
+                }
+            })
+
+        })
+
+        $("#js_add").click(function () {
+            var name = $("#js_name").val();
+            var id = guid();
+            var businessType_id = "1";
+            var classContent = "css_content_ul_li ";
+            var htmlText = "";
+            addli();
+
+            htmlText += "<span>"
+                     + name
+                     + " </span><div><a href=\"#\">修改</a><a href=\"#\">删除</a></div>";
+
+
+            var li = $(".js_blank").first();
+            li.append(htmlText);
+            li.attr("id", id);
+            li.removeClass("js_blank");
+            li.addClass("js_new");
+
+            alert("SUCCESS");
+        })
+
+        $("#js_save").click(function () {
+            var jsonData = "";
+            $(".js_new").each(function (index, item) {
+                var id = item.id;
+                var name = item.firstChild.textContent;
+
+                $.ajax({
+                    type: "POST", //访问WebService使用Post方式请求
+                    contentType: "application/json;charset=utf-8", //WebService 会返回Json类型
+                    url: "../WebService1.asmx/SaveBusinessClassTwo", //调用WebService
+                    data: "{id:'" + id + "',businesstypeclassOneId:'" + businesstypeclassOneId + "',businessTypeClassTwoName:'" + name + "'}", //Email参数
+                    dataType: 'json',
+
+                    error: function (x, e) {
+                        alert("error");
+                    },
+                    success: function (response) { //回调函数，result，返回值
+                        alert(response.d);
+                    }
+                })
+            })
+        })
+
+        function addli() {
+            var items = $('#js_content_ul >li')
+            var blank_count = $(".js_blank").length;
+
+            if (blank_count == 0) {
+                var htmlText = "<ul>";
+                for (var j = 0; j < 5; j++) {
+                    if (j == 4) {
+                        htmlText += "<li class=\"js_blank css_content_ul_li css_li_border_right css_li_border_bottom\"></li>";
+                    } else if (j == 0) {
+                        htmlText += "<li class=\"js_blank css_content_ul_li css_li_border_left css_li_border_bottom\"></li>";
+                    } else {
+                        htmlText += "<li class=\"js_blank css_content_ul_li css_li_border_bottom\"></li>";
+                    }
+                }
+                htmlText += "</ul>";
+                $('#js_content_ul').append(htmlText);
+            }
+        }
+
+        function guid() {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        };
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+
+    </script>
 </body>
 </html>

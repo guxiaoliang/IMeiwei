@@ -138,10 +138,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adimgs.cs" />
+    <Compile Include="adsetting.cs" />
+    <Compile Include="areaone.cs" />
+    <Compile Include="areatwo.cs" />
+    <Compile Include="article.cs" />
+    <Compile Include="articleimg.cs" />
     <Compile Include="business.cs" />
+    <Compile Include="businessimgs.cs" />
+    <Compile Include="businessselectdetail.cs" />
+    <Compile Include="businessselectitem.cs" />
+    <Compile Include="businesssendertype.cs" />
+    <Compile Include="businesstype.cs" />
+    <Compile Include="businesstypeclassone.cs" />
+    <Compile Include="businesstypeclasstwo.cs" />
+    <Compile Include="idfactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="sceneclassification.cs" />
+    <Compile Include="servicesettings.cs" />
     <Compile Include="SysManage.cs" />
     <Compile Include="ticket.cs" />
     <Compile Include="ticketinfo.cs" />

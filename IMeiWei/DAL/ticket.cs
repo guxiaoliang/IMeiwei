@@ -21,9 +21,10 @@ namespace IMeiWei.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select count(1) from ticket");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20)			};
+					new MySqlParameter("@Id", MySqlDbType.Int64)
+			};
 			parameters[0].Value = Id;
 
 			return DbHelperMySQL.Exists(strSql.ToString(),parameters);
@@ -37,22 +38,22 @@ namespace IMeiWei.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into ticket(");
-			strSql.Append("Id,TicketNumber,TicketAmount,LimitTime,CreateTime,CreateBy)");
+			strSql.Append("TicketNumber,TicketAmount,LimitTime,CreateTime,CreateBy,TicketReferenceId)");
 			strSql.Append(" values (");
-			strSql.Append("@Id,@TicketNumber,@TicketAmount,@LimitTime,@CreateTime,@CreateBy)");
+			strSql.Append("@TicketNumber,@TicketAmount,@LimitTime,@CreateTime,@CreateBy,@TicketReferenceId)");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20),
 					new MySqlParameter("@TicketNumber", MySqlDbType.Int32,11),
 					new MySqlParameter("@TicketAmount", MySqlDbType.Int32,11),
 					new MySqlParameter("@LimitTime", MySqlDbType.DateTime),
 					new MySqlParameter("@CreateTime", MySqlDbType.DateTime),
-					new MySqlParameter("@CreateBy", MySqlDbType.VarChar,255)};
-			parameters[0].Value = model.Id;
-			parameters[1].Value = model.TicketNumber;
-			parameters[2].Value = model.TicketAmount;
-			parameters[3].Value = model.LimitTime;
-			parameters[4].Value = model.CreateTime;
-			parameters[5].Value = model.CreateBy;
+					new MySqlParameter("@CreateBy", MySqlDbType.VarChar,255),
+					new MySqlParameter("@TicketReferenceId", MySqlDbType.VarChar,36)};
+			parameters[0].Value = model.TicketNumber;
+			parameters[1].Value = model.TicketAmount;
+			parameters[2].Value = model.LimitTime;
+			parameters[3].Value = model.CreateTime;
+			parameters[4].Value = model.CreateBy;
+			parameters[5].Value = model.TicketReferenceId;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -75,21 +76,24 @@ namespace IMeiWei.DAL
 			strSql.Append("TicketAmount=@TicketAmount,");
 			strSql.Append("LimitTime=@LimitTime,");
 			strSql.Append("CreateTime=@CreateTime,");
-			strSql.Append("CreateBy=@CreateBy");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append("CreateBy=@CreateBy,");
+			strSql.Append("TicketReferenceId=@TicketReferenceId");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@TicketNumber", MySqlDbType.Int32,11),
 					new MySqlParameter("@TicketAmount", MySqlDbType.Int32,11),
 					new MySqlParameter("@LimitTime", MySqlDbType.DateTime),
 					new MySqlParameter("@CreateTime", MySqlDbType.DateTime),
 					new MySqlParameter("@CreateBy", MySqlDbType.VarChar,255),
+					new MySqlParameter("@TicketReferenceId", MySqlDbType.VarChar,36),
 					new MySqlParameter("@Id", MySqlDbType.Int64,20)};
 			parameters[0].Value = model.TicketNumber;
 			parameters[1].Value = model.TicketAmount;
 			parameters[2].Value = model.LimitTime;
 			parameters[3].Value = model.CreateTime;
 			parameters[4].Value = model.CreateBy;
-			parameters[5].Value = model.Id;
+			parameters[5].Value = model.TicketReferenceId;
+			parameters[6].Value = model.Id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -110,9 +114,10 @@ namespace IMeiWei.DAL
 			
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("delete from ticket ");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20)			};
+					new MySqlParameter("@Id", MySqlDbType.Int64)
+			};
 			parameters[0].Value = Id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
@@ -152,10 +157,11 @@ namespace IMeiWei.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,TicketNumber,TicketAmount,LimitTime,CreateTime,CreateBy from ticket ");
-			strSql.Append(" where Id=@Id ");
+			strSql.Append("select Id,TicketNumber,TicketAmount,LimitTime,CreateTime,CreateBy,TicketReferenceId from ticket ");
+			strSql.Append(" where Id=@Id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@Id", MySqlDbType.Int64,20)			};
+					new MySqlParameter("@Id", MySqlDbType.Int64)
+			};
 			parameters[0].Value = Id;
 
 			IMeiWei.Model.ticket model=new IMeiWei.Model.ticket();
@@ -203,6 +209,10 @@ namespace IMeiWei.DAL
 				{
 					model.CreateBy=row["CreateBy"].ToString();
 				}
+				if(row["TicketReferenceId"]!=null)
+				{
+					model.TicketReferenceId=row["TicketReferenceId"].ToString();
+				}
 			}
 			return model;
 		}
@@ -213,7 +223,7 @@ namespace IMeiWei.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select Id,TicketNumber,TicketAmount,LimitTime,CreateTime,CreateBy ");
+			strSql.Append("select Id,TicketNumber,TicketAmount,LimitTime,CreateTime,CreateBy,TicketReferenceId ");
 			strSql.Append(" FROM ticket ");
 			if(strWhere.Trim()!="")
 			{
